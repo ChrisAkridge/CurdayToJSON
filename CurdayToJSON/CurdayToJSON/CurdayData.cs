@@ -98,6 +98,23 @@ namespace CurdayToJSON
 			bytes[5] = f;	
 		}
 
+		public static SixByteMask Parse(string value)
+		{
+			SixByteMask result = new SixByteMask(0, 0, 0, 0, 0, 0);
+			value = value.Trim().ToLowerInvariant();
+
+			for (int i = 0; i < 6; i++)
+			{
+				char highNybble = value[(i * 2)];
+				char lowNybble = value[(i * 2) + 1];
+
+				result.bytes[i] = (byte)(Convert.ToInt32(highNybble.ToString(), 16) * 16);
+				result.bytes[i] += (byte)(Convert.ToInt32(lowNybble.ToString(), 16));
+			}
+
+			return result;
+		}
+
 		public override string ToString()
 		{
 			StringBuilder resultBuilder = new StringBuilder();

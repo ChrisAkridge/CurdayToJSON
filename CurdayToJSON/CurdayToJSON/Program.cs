@@ -11,6 +11,7 @@ namespace CurdayToJSON
 	{
 		static void Main(string[] args)
 		{
+			Console.WriteLine($"\tToday is Julian Date {FormatHelpers.DateToJulianDate(DateTime.Now)}");
 			//if (args.Length != 4 || args[0] != "-i" || args[0] != "/i" || args[2] != "-o" || args[2] != "/o")
 			//{
 			//	PrintUsage();
@@ -31,6 +32,9 @@ namespace CurdayToJSON
 			//}
 
 			var curday = CurdayReader.Read(args[0]);
+			string json = JSONWriter.Serialize(curday);
+			var curdayDeserialized = JSONReader.Deserialize(json);
+			string json2 = JSONWriter.Serialize(curdayDeserialized);
 		}
 
 		private static void PrintUsage()

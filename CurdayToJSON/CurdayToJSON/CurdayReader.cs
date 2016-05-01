@@ -189,9 +189,9 @@ namespace CurdayToJSON
 		private static CurdayProgram ReadProgram(BinaryReader reader, out bool lastProgram)
 		{
 			CurdayProgram result = new CurdayProgram();
-			
-			// Skip null byte
-			reader.BaseStream.Position += 1;
+
+			// Skip next byte if null
+			if (reader.PeekChar() == '\0') { reader.BaseStream.Position += 1; }
 
 			// Read time slot (null-terminated string)
 			result.TimeSlot = reader.ReadNTString();
