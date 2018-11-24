@@ -9,6 +9,8 @@ namespace CurdayToJSON
 {
 	internal static class CurdayReader
 	{
+		// http://prevueguide.com/wiki/Prevue_Emulation:Curday.dat_and_Nxtday.dat
+		
 		internal static Curday Read(string inputFilePath)
 		{
 			BinaryReader reader = new BinaryReader(File.OpenRead(inputFilePath), Encoding.ASCII);
@@ -110,12 +112,12 @@ namespace CurdayToJSON
 			if (!byte.TryParse(julianDateString, out julianDate)) { throw new IOException($"Invalid Julian date value {julianDateString}. Expected number between 0 and 255."); }
 			result.JulianDate = julianDate;
 
-			// Skip number of channels.
-			reader.ReadNTString();
+			// Read number of channels (null-terminated string).
+			result.NumberOfChannels = int.Parse(reader.ReadNTString());
 
-			// Skip two unknown values.
-			reader.ReadNTString();
-			reader.ReadNTString();
+			// Read two unknown values
+			result.UnknownValue2 = int.Parse(reader.ReadNTString());
+			result.UnknownValue3 = int.Parse(reader.ReadNTString());
 
 			return result;
 		}

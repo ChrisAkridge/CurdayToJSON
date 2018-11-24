@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="CurdayData.cs" />
     <Compile Include="CurdayReader.cs" />
+    <Compile Include="CurdayWriter.cs" />
     <Compile Include="Extensions\BinaryStreamExtensions.cs" />
     <Compile Include="Extensions\CharExtensions.cs" />
     <Compile Include="FormatHelpers.cs" />
